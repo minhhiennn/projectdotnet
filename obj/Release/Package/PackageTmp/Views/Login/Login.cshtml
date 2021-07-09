@@ -1,0 +1,60 @@
+﻿@model ProjectDotNet.Models.UsersModel
+@{
+    ViewBag.Title = "Login";
+}
+<style>
+    .validation-summary-errors ul, .validation-summary-errors li {
+        list-style: none;
+        display: inline;
+        padding: 0;
+    }
+</style>
+<section id="form">
+    <!--form-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-1">
+                <div class="login-form">
+                    <!--login form-->
+                    <h2>Login to your account</h2>
+
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*<input type = "email" placeholder = "Name" name = "email" required />*@
+                        @*@Html.TextBox("email", null, new { @type = "email", @placeholder = "Name" });*@
+                        @Html.EditorFor(model => model.usersLogin.Email, new { htmlAttributes = new { @type = "email", @placeholder = "Name", @required = "required",@id="emailLogin" } })
+                        @*<input type="password" placeholder="password" name="password" />*@
+                        @*@Html.Password("password", null, new { @placeholder = "password" });*@
+                        @Html.EditorFor(model => model.usersLogin.PassWord, new { htmlAttributes = new { @type = "password", @placeholder = "Password", @required = "required",@id="passwordLogin", @minlength = "9" } })
+                        <p id="passwordErr" name="passwordErr" style="color:red" hidden>Password phải tối thiểu 9 ký tự</p>
+                        @Html.ValidationSummary(true, "", new { @style = "color:red" })
+                        <span>
+                            <input type="checkbox" class="checkbox">
+                            Keep me signed in
+                        </span>
+                        <button type="submit" class="btn btn-default">Login</button>
+                    }
+                </div><!--/login form-->
+            </div>
+            <div class="col-sm-1">
+                <h2 class="or">OR</h2>
+            </div>
+            <div class="col-sm-4">
+                <div class="signup-form">
+                    <!--sign up form-->
+                    <h2>New User Signup!</h2>
+                    @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.EditorFor(model => model.usersRegister.UserName, new { htmlAttributes = new { @type = "text", @placeholder = "Name", @required = "required" } })
+                        @Html.EditorFor(model => model.usersRegister.Email, new { htmlAttributes = new { @type = "email", @placeholder = "Email Address", @required = "required" } })
+                        @Html.EditorFor(model => model.usersRegister.Password, new { htmlAttributes = new { @type = "password", @placeholder = "Password", @required = "required", @minlength="9"} })
+                        @Html.ValidationSummary(true, "", new { @style = "color:red" })
+                        <button type="submit" class="btn btn-default">Signup</button>
+                    }
+                </div><!--/sign up form-->
+            </div>
+        </div>
+    </div>
+</section><!--/form-->

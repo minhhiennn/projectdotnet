@@ -1,0 +1,14 @@
+﻿.header-top-left{
+    border:1px solid red;
+}
+.main-container {
+    border: 1px solid red;
+}
+.child{
+    border:1px solid green;
+    margin:25px;
+}
+form input{
+    margin:5px;
+    margin-left:10px;
+}

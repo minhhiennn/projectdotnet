@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Model.Framework.Product>
+@{
+    ViewBag.Title = "ProductIndex";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Quản Lý Sản Phẩm</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Quản Lý Sản Phẩm</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+                .
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                DataTable Example
+
+            </div>
+            <div class="card-body">
+                <div style="display:flex;justify-content: flex-end;margin-bottom:10px">
+                    <div id="ThemSanPham">
+                        <button style="border-radius:4px;background-color:aqua">Thêm sản phẩm</button>
+                    </div>
+                    <div style="margin-left:5px" id="XoaSanPham" hidden>
+                        <button style="border-radius:4px;background-color:red">Xóa sản phẩm</button>
+                    </div>
+                </div>
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th id="ToDelete"><input type="checkbox" id="checkToDelete" /></th>
+                            <th>Tên</th>
+                            <th>Mã Công ty</th>
+                            <th>Mô tả</th>
+                            <th>Hình ảnh</th>
+                            <th>Giá</th>
+                            <th style="text-align:center;padding-left: 20px;">Sửa</th>
+                            <th style="text-align:center;padding-left: 20px;">Xóa</th>
+                        </tr>
+                    </thead>
+                    @*<tfoot>
+                            <tr>
+                                <th><input type="checkbox" /></th>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </tfoot>*@
+                    <tbody>
+                        @for (var i = 0; i < Model.Count(); i++)
+                        {
+                            <tr>
+                                <th onclick="test()"><input type="checkbox" class="checkDelete" id=@Model.ElementAt(i).id /></th>
+                                <td>@Model.ElementAt(i).Product_Name</td>
+                                <td>@Model.ElementAt(i).id_Company</td>
+                                <td>@Model.ElementAt(i).Product_Details</td>
+                                <td><img src=@Model.ElementAt(i).Product_Img style="height:50px;width:80px" /> </td>
+                                <td>@Model.ElementAt(i).Product_Price</td>
+                                <td style="text-align:center"><a href="/Admin/Product/UpdateProduct?productId=@Model.ElementAt(i).id"><i class="fas fa-tools"></i></a></td>
+                                <td style="text-align:center"><a href="/Admin/Product/DeleteProduct?productId=@Model.ElementAt(i).id"><i class="fas fa-trash-alt"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    let x2 = document.getElementById("XoaSanPham");
+    document.getElementById("ToDelete").addEventListener('click', () => {
+        let x3 = document.getElementsByClassName("checkDelete");
+        let x = document.getElementById("checkToDelete");
+        if (x.checked == true) {
+            x2.hidden = false;
+            for (let i = 0; i < x3.length; i++) {
+                x3[i].checked = true;
+            }
+            x2.hidden = false;
+        } else {
+            for (let i = 0; i < x3.length; i++) {
+                x3[i].checked = false;
+            }
+            x2.hidden = true;
+        }
+    })
+    function test() {
+        let x4 = document.getElementsByClassName("checkDelete");
+        let x = document.getElementById("checkToDelete");
+        let x2 = document.getElementById("XoaSanPham");
+        let count = 0;
+        for (let i = 0; i < x4.length; i++) {
+            if (x4[i].checked == true) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            x.checked = true;
+            x2.hidden = false;
+        } else {
+            x.checked = false;
+            x2.hidden = true;
+        }
+    }
+    document.getElementById("XoaSanPham").addEventListener('click', () => {
+        let q = confirm("Bạn có chắc chắn muốn xóa những sản phẩm này không?");
+        if (q == true) {
+            let x = "";
+            let x4 = document.getElementsByClassName("checkDelete");
+            for (let i = 0; i < x4.length; i++) {
+                if (x4[i].checked == true) {
+                    x = x + x4[i].id + ",";
+                }
+            }
+            x = x.substring(0, x.length - 1);
+            window.location.href = '/Admin/Product/DeleteMultiProduct?deleteIds=' + x;
+        }       
+    });
+    document.getElementById("ThemSanPham").addEventListener('click', () => {
+        window.location.href = '/Admin/Product/CreateProduct';
+    })
+</script>
+

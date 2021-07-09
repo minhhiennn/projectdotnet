@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Thông Tin User</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">UserIndex</a></li>
+            <li class="breadcrumb-item active">Thông Tin User</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="/Admin/User/CreateUser"
+                      method="post" enctype="multipart/form-data">
+                    <div class="card shadow mb-4" ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Thông tin chung
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: flex;">
+                                <span style="padding-right: 120px; margin-top: 10px;width:200px">
+                                    Hình Ảnh:
+                                </span>
+                                <img id="img" src="#" style="height:80px;width:80px;margin-left:80px" alt="chưa chọn hình" />
+                                <div style="padding: 5px; border-radius: 3px; width: 600px;">
+                                    <input name="img" type="file" accept="image/*" onchange="readURL(this)">
+                                </div>
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">User Name:</span>
+                                <input name="username" type="text" class="form-control" style="width:250px;margin-left:80px" required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Email:</span>
+                                <input name="email" type="text" class="form-control" style="width:250px;margin-left:80px" required />
+                            </div>
+                            @if (ViewBag.Err != null)
+                            {
+                                <p style="color:red">Email đã tồn tại</p>
+                            }
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Password:</span>
+                                <input name="password" type="text" class="form-control" style="width:250px;margin-left:80px" required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Role:</span>
+                                <select name="role" class="form-select" style="width:250px;margin-left:80px">
+                                    <option value="user">user</option>
+                                    <option value="admin">admin</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4" ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Thông tin tiếp theo
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Địa Chỉ:</span>
+                                <input name="address" type="text" class="form-control" style="width:250px;margin-left:80px" required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Ngày Sinh:</span>
+                                <input name="DOB" type="date" class="form-control" style="width:250px;margin-left:80px" required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Số Điện Thoại:</span>
+                                <input name="phone" type="text" class="form-control" style="width:250px;margin-left:80px" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div style="padding-left: 231px">
+                                <button type="submit"
+                                        style="border: none; background-color: #36b9cc; border-radius: 6px; margin-right: 10px">
+                                    Lưu
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function readURL(input) {
+        var url = input.value;
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+        if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        else {
+            $('#img').attr('src', '#');
+        }
+    }
+</script>

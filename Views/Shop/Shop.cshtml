@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Model.Framework.Product>
+@{
+    ViewBag.Title = "Shop";
+}
+<section id="advertisement">
+    <div class="container">
+        <img src="~/assets/images/shop/advertisement.jpg" alt="" />
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            @{Html.RenderPartial("~/Views/LeftSidebar/LeftSideBar.cshtml");
+
+
+
+            }
+            @*{Html.RenderPartial("~/Views/foo/box.ascx");}
+                @Html.EditorFor(x => x.MyModelProperty)
+                @Html.DisplayFor(x => x.MyModelProperty)*@
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <!--features_items-->
+                    <h2 class="title text-center">Features Items</h2>
+                    @for (int i = 0; i < Model.Count(); i++)
+                    {
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src=@Model.ElementAt(i).Product_Img style="width:250px;height:250px" alt="" />
+                                        <h2>$@Html.DisplayFor(modelItem => Model.ElementAt(i).Product_Price)</h2>
+                                        <p>@Html.DisplayFor(modelItem => Model.ElementAt(i).Product_Name)</p>
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    </div>
+                                    <div class="product-overlay">
+                                        <div class="overlay-content">
+                                            <h2>$@Html.DisplayFor(modelItem => Model.ElementAt(i).Product_Price)</h2>
+                                            <a href="/ProductDetails/ProductDetail?id=@Model.ElementAt(i).id"><p>@Html.DisplayFor(modelItem => Model.ElementAt(i).Product_Name)</p></a>
+                                            <a href="/Cart/AddToCart?productId=@Model.ElementAt(i).id&quantity=1" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choose">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                        <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <ul class="pagination">
+                        @if (ViewBag.currentPage == 1)
+                        {
+                            for (int i = 1; i <= ViewBag.pageSplit; i++)
+                            {
+                                <li id="@i"><a href="/Shop/Shop?page=@i">@i</a></li>
+                            }
+                            <li><a href="/Shop/Shop?page=@(ViewBag.currentPage + 1)">&raquo;</a></li>
+                        }
+                        else if (ViewBag.currentPage == ViewBag.pageSplit)
+                        {
+                            <li><a href="/Shop/Shop?page=@(ViewBag.currentPage - 1)">&laquo;</a></li>
+                            for (int i = 1; i <= ViewBag.pageSplit; i++)
+                            {
+                                <li id="@i"><a href="/Shop/Shop?page=@i">@i</a></li>
+                            }
+                        }
+                        else
+                        {
+                            <li><a href="/Shop/Shop?page=@(ViewBag.currentPage - 1)">&laquo;</a></li>
+                            for (int i = 1; i <= ViewBag.pageSplit; i++)
+                            {
+                                <li id="@i"><a href="/Shop/Shop?page=@i">@i</a></li>
+                            }
+                            <li><a href="/Shop/Shop?page=@(ViewBag.currentPage + 1)">&raquo;</a></li>
+                        }
+                    </ul>
+                </div><!--features_items-->
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    var x = document.getElementById('@ViewBag.currentPage');
+    x.setAttribute('class', 'active');
+</script>
+

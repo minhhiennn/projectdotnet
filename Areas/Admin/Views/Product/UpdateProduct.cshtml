@@ -1,0 +1,90 @@
+﻿@model Model.Framework.Product
+@{
+    ViewBag.Title = "UpdateProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Thêm Sản Phẩm</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">ProductIndex</a></li>
+            <li class="breadcrumb-item active">Update Sản Phẩm</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="/Admin/Product/UpdateProduct"
+                      method="post" enctype="multipart/form-data">
+                    <div class="card shadow mb-4" ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Thông tin chung
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <input name="productId" value=@Model.id hidden type="text" />
+                            <div style="display: flex;">
+                                <span style="padding-right: 120px; margin-top: 10px">
+                                    Chọn Hình Ảnh:
+                                </span>
+                                <img id="img" src=@Model.Product_Img style="height:80px;width:80px" alt="chưa chọn hình" />
+                                <div style="padding: 5px; border-radius: 3px; width: 600px;">
+                                    <input name="img" type="file" accept="image/*" onchange="readURL(this)">
+                                </div>
+                            </div>
+                            @if (ViewBag.Err != null) 
+                            {
+                                <p style="color:red">@ViewBag.Err</p>
+                            }
+                            <div style="display:flex;">
+                                <span>Chọn Công Ty:</span>
+
+                                @Html.DropDownList("CompanyName", new SelectList(ViewBag.Company, "id", "company_Name", Model.id_Company), new { @class = "form-select", @style = "margin-left:125px;width:250px" })
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px">Tên Sản Phẩm:</span>
+                                <input name="productName" type="text" class="form-control" placeholder="Tên Sản Phẩm" style="width:250px;margin-left:125px" value=@Model.Product_Name required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px">Giá Sản Phẩm:</span>
+                                <input name="productPrice" type="number" class="form-control" placeholder="Giá Sản Phẩm" style="width:250px;margin-left:125px" value=@Model.Product_Price required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:30px">Mô Tả Sản Phẩm:</span>
+                                <textarea name="productDescription" class="form-control" rows="3" style="width:250px;margin-left:105px" required>@Model.Product_Details</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div style="padding-left: 231px">
+                                <button type="submit"
+                                        style="border: none; background-color: #36b9cc; border-radius: 6px; margin-right: 10px">
+                                    Lưu
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function readURL(input) {
+        var url = input.value;
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+        if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        else {
+            $('#img').attr('src', '#');
+        }
+    }
+</script>
+

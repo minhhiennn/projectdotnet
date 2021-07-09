@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "AccountInformation";
+}
+<style>
+    #divall {
+        display: flex;
+    }
+
+    #div1 {
+    }
+
+    #div2 {
+        border-left: 2px solid green;
+        margin-left: auto;
+        margin-right: 300px;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    #imgUrl {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-left: 45px;
+    }
+</style>
+<link href="~/assets/custom/AccountInformation.css" rel="stylesheet" />
+<div class="container">
+    @ViewBag.DOB
+    <div class="header-top-left">
+        <div class="child">
+            <h3>Hồ sơ của tôi</h3>
+            <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="child">
+            @using (Html.BeginForm("SaveUserInfo", "AccountInfo", FormMethod.Post, new { enctype = "multipart/form-data",onsubmit= "return phonenumber()" }))
+            {
+                <div id="divall">
+                    <div id="div1">
+                        @Html.AntiForgeryToken()
+                        <label for="name">Tên Đăng Nhập: </label>
+                        @Html.TextBox("name", null, new { @type = "text", @placeholder = "Name", @required = "required", @Value = ViewBag.TenDangNhap, @disabled = "disabled" })<br />
+                        <label for="email">Email: </label>
+                        @Html.TextBox("email", null, new { @type = "email", @placeholder = "Email", @required = "required", @Value = ViewBag.Email, @disabled = "disabled" })<br />
+                        <label for="phone">Phone: </label>
+                        @Html.TextBox("phone", null, new { @type = "text", @placeholder = "Số điện thoại", @required = "required", @Value = ViewBag.Phone })<br />
+                        <p name="phoneerror" id="phoneerr" hidden style="color:red">Số điện thoại không hợp lệ</p>
+                        <label for="address">Địa chỉ: </label>
+                        @Html.TextBox("address", null, new { @type = "text", @placeholder = "Địa chỉ", @required = "required", @Value = ViewBag.Address })<br />
+                        <label for="dateofbirth">Ngày sinh: </label>
+                        @Html.TextBox("dateofbirth", null, new { @type = "date", @required = "required", @Value = ViewBag.DOB })<br />
+
+                    </div>
+                    <div id="div2">
+                        <img id="imgUrl" src="@ViewBag.ImgUrl" />
+                        @*<input type="file" onchange="readURL(this);" id="anhSanPham" name="ImageFile" />*@
+                        @Html.TextBox("img", null, new { @type = "file", @onchange = "readURL(this);", @id = "anhSanPham" })
+                        <p>@ViewBag.Message</p>
+                    </div>
+                </div>
+                <button type="submit">Lưu</button>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    function phonenumber() {
+        var inputPhone = document.getElementById('phone').value;
+        var phoneno = /^\d{10}$/;
+        if (inputPhone.match(phoneno)) {
+            console.log("ahihi");
+            return true;
+        }
+        else {
+            var phoneerr = document.getElementById('phoneerr')
+            phoneerr.removeAttribute('hidden');
+            return false;
+        }
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgUrl')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+

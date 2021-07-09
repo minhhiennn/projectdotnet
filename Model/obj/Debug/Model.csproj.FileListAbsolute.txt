@@ -1,0 +1,16 @@
+C:\Users\minhh\source\repos\ProjectDotNet\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\Model.dll.config
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\Model.dll
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\Model.pdb
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\EntityFramework.dll
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\Newtonsoft.Json.dll
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\EntityFramework.xml
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\Newtonsoft.Json.xml
+C:\Users\minhh\source\repos\ProjectDotNet\Model\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\minhh\source\repos\ProjectDotNet\Model\obj\Debug\Model.csproj.CopyComplete
+C:\Users\minhh\source\repos\ProjectDotNet\Model\obj\Debug\Model.dll
+C:\Users\minhh\source\repos\ProjectDotNet\Model\obj\Debug\Model.pdb
+C:\Users\minhh\source\repos\ProjectDotNet\Model\obj\Debug\Model.csprojAssemblyReference.cache

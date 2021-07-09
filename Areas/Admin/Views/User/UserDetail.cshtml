@@ -1,0 +1,83 @@
+﻿@model Model.DTO.Admin.UserAdminDTO
+@{
+    ViewBag.Title = "UserDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Thông Tin User</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">UserIndex</a></li>
+            <li class="breadcrumb-item active">Thông Tin User</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="/Admin/Product/CreateProduct"
+                      method="post" enctype="multipart/form-data">
+                    <div class="card shadow mb-4" ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Thông tin chung
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: flex;">
+                                <span style="padding-right: 120px; margin-top: 10px;width:200px">   
+                                    Hình Ảnh:
+                                </span>
+                                <img id="img" src=@Model.imgUrl style="height:80px;width:80px;margin-left:80px" alt="chưa chọn hình" />                             
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">User Name:</span>
+                                <input type="text" class="form-control" style="width:250px;margin-left:80px" value=@Model.userName required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Email:</span>
+                                <input type="text" class="form-control" style="width:250px;margin-left:80px" value=@Model.email required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Password:</span>
+                                <input type="text" class="form-control" style="width:250px;margin-left:80px" value=@Model.password required/>
+                            </div><div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Role:</span>
+                                <input type="text" class="form-control" style="width:250px;margin-left:80px" value=@Model.role required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4" ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Thông tin tiếp theo
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Địa Chỉ:</span>
+                                <input  type="text" class="form-control" style="width:250px;margin-left:80px" value=@(Model.User_address) required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Ngày Sinh:</span>
+                                <input type="text" class="form-control" style="width:250px;margin-left:80px" value=@Model.DOB required />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Số Điện Thoại:</span>
+                                <input type="text" class="form-control" style="width:250px;margin-left:80px" value=@Model.Phone required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div style="padding-left: 231px">
+                                <button type="submit"
+                                        style="border: none; background-color: #36b9cc; border-radius: 6px; margin-right: 10px">
+                                    Trở về
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+

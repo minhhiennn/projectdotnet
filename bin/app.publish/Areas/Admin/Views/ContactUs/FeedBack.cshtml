@@ -1,0 +1,56 @@
+﻿@model Model.Framework.contact
+@{
+    ViewBag.Title = "FeedBack";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">FeedBack</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">ContactUsIndex</a></li>
+            <li class="breadcrumb-item active">FeedBack</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="/Admin/ContactUs/FeedBackDone"
+                      method="post">
+                    <div class="card shadow mb-4" ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Thông tin feedback
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <input name="id" type="text" hidden value=@Model.id />
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Tên Người Gửi:</span>
+                                <input type="text" class="form-control" style="width:250px;margin-left:80px" required disabled value=@Model.name />
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:6px;width:150px">Email:</span>
+                                <input type="text" class="form-control" style="width:250px;margin-left:80px" required value=@Model.email disabled />
+                                <input name="email" type="text" class="form-control" style="width:250px;margin-left:80px" required value=@Model.email hidden/>
+                            </div>
+                            <div style="display:flex;margin-top:20px">
+                                <span style="margin-top:30px;width:150px">Nội Dung FeedBack:</span>
+                                <textarea name="noidung" class="form-control" rows="3" style="width:250px;margin-left:80px" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div style="padding-left: 231px">
+                                <button type="submit"
+                                        style="border: none; background-color: #36b9cc; border-radius: 6px; margin-right: 10px">
+                                    Gửi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
